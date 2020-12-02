@@ -1,12 +1,17 @@
 # LaMulanaScript
 A tool to decode and reencode the "script_code.dat" files of the La-Mulana remake.
 
-Requires a text file called `fontChars.txt`, containing all the unique characters found in font00.png, in the same order.
+Requires a text file called `fontChars.txt`, containing all the __unique__ characters found in font00.png, in the same order.  
+`fontChars.txt` must be in the same folder as the input file.
 
-These characters are just used as reference for the conversion.  
+The characters in the file are just used as reference for the conversion.  
 Take the special word "Undefined" as an example, which is made of 3 tiles.  
 You can use any 3 unicode characters for the text equivalent (regular characters, not emojis).
 
+## Usage:
+`LaMulanaScript.exe inputfile`  
+Encoding or decoding functionality is selected according to the file extension.  
+Or just drag and drop the dat/txt file onto the executable
 
 ## Notes:
 * `font00.png` is a sheet containing the characters, each being 21x21 pixels in size.
