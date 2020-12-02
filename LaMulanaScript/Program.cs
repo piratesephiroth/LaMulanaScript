@@ -88,7 +88,6 @@ namespace LaMulanaScript
 
                     decodedText += decodedBlock;
                 }
-
             }
 
             string outputTxtFile = Path.GetDirectoryName(filePath) + "\\" + Path.GetFileNameWithoutExtension(filePath) + "_dec.txt";
@@ -99,7 +98,7 @@ namespace LaMulanaScript
             }
         }
 
-         static void EncodeFile(string textFilePath, string fontChars)
+        static void EncodeFile(string textFilePath, string fontChars)
         {
             string decodedText = File.ReadAllText(textFilePath);
             Regex blockRegex = new Regex(@"(?sn)-{40} BLOCK (\d+) \((\d+)\) START(\r\n|\n|\r)(?<blockData>.*?)(\r\n|\n|\r)-{40} BLOCK (\d+) END", RegexOptions.Compiled);
@@ -127,7 +126,6 @@ namespace LaMulanaScript
 
                 }
             }
-
         }
 
         static string DecodeBlock(byte[] block, string fontChars)
@@ -230,7 +228,6 @@ namespace LaMulanaScript
                             blockText.Append($"{{UNK {value}}}");
                             blockText.Append("\n");
                             break;
-
                     }
                 }
 
@@ -363,7 +360,6 @@ namespace LaMulanaScript
                                 break;
 
                         }
-
                     }
 
                     // HANDLE REGULAR CHARACTERS
