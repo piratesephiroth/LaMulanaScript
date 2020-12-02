@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -10,7 +10,7 @@ namespace LaMulanaScript
     {
         static void Main(string[] args)
         {
-            if(args.Length == 0)
+            if (args.Length == 0)
             {
                 Console.WriteLine("================================");
                 Console.WriteLine("LA-MULANA script Decoder/Encoder");
@@ -18,6 +18,7 @@ namespace LaMulanaScript
                 Console.WriteLine();
                 Console.WriteLine("ERROR: No input file specified");
                 Console.ReadKey();
+                return;
             }
 
             string inputFilePath = Path.GetFullPath(args[0]);
@@ -37,11 +38,12 @@ namespace LaMulanaScript
                 {
                     fontChars += fileText[i];
                 }
-                
-                if(!uniqueCharacters(fontChars))
+
+                if (!uniqueCharacters(fontChars))
                 {
                     Console.WriteLine("ERROR: fontChars.txt contains duplicate characters.");
                     Console.ReadKey();
+                    return;
                 }
             }
             else
@@ -365,7 +367,7 @@ namespace LaMulanaScript
                     // HANDLE REGULAR CHARACTERS
                     if (i < blockText.Length && !blockText[i].Equals('{'))
                     {
-                        while (i < blockText.Length &&  !blockText[i].Equals('{'))
+                        while (i < blockText.Length && !blockText[i].Equals('{'))
                         {
                             // the line break separate entries
                             // (read according to the OS the text file was edited on)
@@ -385,7 +387,7 @@ namespace LaMulanaScript
                             }
 
                             // space
-                            else if (blockText[i].Equals(' ')) 
+                            else if (blockText[i].Equals(' '))
                             {
                                 WriteUShort(0x0020, blockData);
                                 i++;
