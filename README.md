@@ -1,5 +1,6 @@
 # LaMulanaScript
-A tool to decode and reencode the "script_code.dat" files of the La-Mulana remake.
+A tool to decode and reencode the "script_code.dat" files of the La-Mulana remake.  
+Based on this script: https://github.com/archagon/la-mulana-hd-text-encoder-decoder
 
 Requires a text file called `fontChars.txt`, containing all the __unique__ characters found in font00.png, in the same order.  
 `fontChars.txt` must be in the same folder as the input file.
