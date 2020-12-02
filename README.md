@@ -10,8 +10,8 @@ You can use any 3 unicode characters for the text equivalent (regular characters
 
 ## Usage:
 `LaMulanaScript.exe inputfile`  
+Or just drag and drop the dat/txt file onto the executable.  
 Encoding or decoding functionality is selected according to the file extension.  
-Or just drag and drop the dat/txt file onto the executable
 
 ## Notes:
 * `font00.png` is a sheet containing the characters, each being 21x21 pixels in size.
