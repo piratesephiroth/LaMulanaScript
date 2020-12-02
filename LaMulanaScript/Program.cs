@@ -29,11 +29,11 @@ namespace LaMulanaScript
                 return;
             }
 
-            string fontCharsFile = Path.GetDirectoryName(inputFilePath) + "\\fontChars.txt";
+            string fontCharsFilePath = Path.GetDirectoryName(inputFilePath) + System.IO.Path.DirectorySeparatorChar + "fontChars.txt";
             string fontChars = "";
-            if (File.Exists(fontCharsFile))
+            if (File.Exists(fontCharsFilePath))
             {
-                string[] fileText = File.ReadAllLines(fontCharsFile);
+                string[] fileText = File.ReadAllLines(fontCharsFilePath);
                 for (int i = 0; i < fileText.Length; i++)
                 {
                     fontChars += fileText[i];
@@ -71,9 +71,6 @@ namespace LaMulanaScript
             string decodedText = "";
             using (BinaryReader inFile = new BinaryReader(File.Open(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)))
             {
-                Console.WriteLine($"fontChars.txt contains {fontChars.Length} characters.");
-
-                // do the decoding
                 ushort blockCount = (ushort)IPAddress.NetworkToHostOrder(inFile.ReadInt16()); // byteswap if necessary
                 short blockSize;
 
@@ -92,7 +89,7 @@ namespace LaMulanaScript
                 }
             }
 
-            string outputTxtFile = Path.GetDirectoryName(filePath) + "\\" + Path.GetFileNameWithoutExtension(filePath) + "_dec.txt";
+            string outputTxtFile = Path.GetDirectoryName(filePath) + System.IO.Path.DirectorySeparatorChar + Path.GetFileNameWithoutExtension(filePath) + "_dec.txt";
 
             using (StreamWriter outFile = new StreamWriter(outputTxtFile, false, Encoding.UTF8))
             {
@@ -107,7 +104,7 @@ namespace LaMulanaScript
             // get individual blocks from input text file
             MatchCollection blockList = blockRegex.Matches(decodedText);
 
-            string outputDatFilePath = Path.GetDirectoryName(textFilePath) + "\\" + Path.GetFileNameWithoutExtension(textFilePath) + "_enc.dat";
+            string outputDatFilePath = Path.GetDirectoryName(textFilePath) + System.IO.Path.DirectorySeparatorChar + Path.GetFileNameWithoutExtension(textFilePath) + "_enc.dat";
 
             FileMode openMode;
             if (File.Exists(outputDatFilePath))
