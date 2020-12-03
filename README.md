@@ -20,7 +20,7 @@ Encoding or decoding functionality is selected according to the file extension.
 * `grif.dat` contains the definitions for each of these characters, listed top to bottom and right to left.  
 It's composed of 16bit unsigned integers.
 First value is the glyph count.  
-The remaining pairs contain the starting horizontal offset and the width.
+The remaining values contain a pair of bytes: first one has the starting horizontal offset, second has the width.
 * The {COL} command uses the CMY color model, so basically the opposite of RGB values.  
 000-000-000 is white, 255-255-255 is black.
 * The executable was compiled with Mono so it runs on non-Windows operating systems as well.
