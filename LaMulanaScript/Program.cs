@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -234,6 +235,15 @@ namespace LaMulanaScript
                 if (value >= 0x0100)
                 {
                     int characterIndex = (int)value - 0x100;
+
+                    if (characterIndex >= fontChars.Length)
+                    {
+                        Console.WriteLine($"ERROR: Character at index {characterIndex} wasn't found in fontChars.txt.");
+                        Console.WriteLine($"Character position in font00.png: X={(characterIndex % 48) * 21}, Y={(characterIndex / 48) * 21}");
+                        Console.ReadKey();
+                        Environment.Exit(1);
+
+                    }
                     blockText.Append(fontChars[characterIndex].ToString());
                 }
             }
@@ -244,7 +254,7 @@ namespace LaMulanaScript
         static byte[] EncodeBlock(string blockText, string fontChars)
         {
             StringBuilder specialString = new StringBuilder();
-            ushort charIndex;
+            int charIndex;
             Regex specialRegex = new Regex(@"(?n)^{(?<command>[a-zA-Z]+)(\s+?(?<arguments>.*?))?}", RegexOptions.Compiled);
             Regex flagRegex = new Regex(@"(\d+)\s?:=\s?(\d+)", RegexOptions.Compiled);
             Regex colorRegex = new Regex(@"(\d+)-(\d+)-(\d+)", RegexOptions.Compiled);
@@ -393,8 +403,17 @@ namespace LaMulanaScript
                             // finally, for regular characters, get index and store it
                             else
                             {
-                                charIndex = (ushort)(fontChars.IndexOf(blockText[i]) + 0x100);
-                                WriteUShort(charIndex, blockData);
+                                charIndex = fontChars.IndexOf(blockText[i]);
+                                if(charIndex == -1)
+                                {
+                                    Console.WriteLine($"ERROR: Character at position {i} could not be found in fontChars.txt");
+                                    Console.ReadKey();
+                                    Environment.Exit(1);
+                                }
+
+                                charIndex += 0x100;
+
+                                WriteUShort((ushort)charIndex, blockData);
                                 i++;
                             }
 
