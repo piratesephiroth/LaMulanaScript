@@ -115,7 +115,7 @@ namespace LaMulanaScript
 
 
             byte[][] outputBlockBytes = new byte[blockList.Count][];
-            // decode blocks into byte arrays
+            // encode text blocks into byte arrays
             for (int i = 0; i < blockList.Count; i++)
             {
                 string blockData = blockList[i].Groups["blockData"].Value;
