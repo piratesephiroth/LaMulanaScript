@@ -113,17 +113,25 @@ namespace LaMulanaScript
             else
                 openMode = FileMode.CreateNew;
 
+
+            byte[][] outputBlockBytes = new byte[blockList.Count][];
+            // decode blocks into byte arrays
+            for (int i = 0; i < blockList.Count; i++)
+            {
+                string blockData = blockList[i].Groups["blockData"].Value;
+                outputBlockBytes[i] = EncodeBlock(blockData, fontChars);
+            }
+
+            // write encoded file
             using (BinaryWriter outFile = new BinaryWriter(File.Open(outputDatFilePath, openMode, FileAccess.ReadWrite)))
             {
-                // write block count
+                // block count
                 WriteUShort((ushort)blockList.Count, outFile);
 
-                // write blocks
+                // blocks
                 for (int i = 0; i < blockList.Count; i++)
                 {
-                    string blockData = blockList[i].Groups["blockData"].Value;
-                    outFile.Write(EncodeBlock(blockData, fontChars));
-
+                    outFile.Write(outputBlockBytes[i]);
                 }
             }
         }
